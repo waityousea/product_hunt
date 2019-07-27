@@ -36,7 +36,7 @@
   </head>
   <body>
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="{% url "主页" %}">
               <img src="{% static "parking-sign.png" %}" width=30 >
               Product Hunt
           </a>
@@ -50,9 +50,18 @@
               <input class="form-control mr-sm-2" style="text-align:right" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
               </form>
-              <a class="btn btn-outline-success my-2 my-sm-0" style="margin-left:5px" href="#">登陆</a>
 
-              <a class="btn btn-outline-success my-2 my-sm-0" style="margin-left:5px;margin-right:100px" href="{% url '注册页面' %}" >注册</a>
+              {% if user.is_authenticated %}
+                  <a class="btn btn-outline-success my-2 my-sm-0" style="margin-left:5px" href="Javascript:{document.getElementById('退出').submit()}">退出</a>
+                  <form id = '退出' method='POST' action="{% url '退出页面'%}">
+                        {% csrf_token %}  <!-- 防止网页攻击的一行代码 -->
+                        <input type="hidden">
+                  </form>
+              {% else %}
+                  <a class="btn btn-outline-success my-2 my-sm-0" style="margin-left:5px" href="{% url '登录页面' %}">登陆</a>
+                  <a class="btn btn-outline-success my-2 my-sm-0" style="margin-left:5px;margin-right:100px" href="{% url '注册页面' %}" >注册</a>
+              {% endif %}
+
             </div>
           </div>
           </nav>
@@ -64,11 +73,11 @@
 
 <footer class="text-muted">
   <div class="container">
-    <p class="float-right">
-      <a href="#">Back to top</a>
+    <p class="float-center">
+      <a href="{% url '主页'%}">Back to top</a>
     </p>
-    <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-    <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.3/getting-started/introduction/">getting started guide</a>.</p>
+    <p>Please download and customize it for yourself!</p>
+    <p><a href="https://baidu.com/">Visit the baidu</a></p>
   </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
