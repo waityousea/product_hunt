@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends "theme.html" %}
+{% load staticfiles %}
+{% block content %}
+
+            <form method='POST' action="{% url '发布页面'%}" align="center" width="40%" entype="multipart/form-data" >
+                 {% csrf_token %}  <!-- 防止网页攻击的一行代码 -->
+                <img class="mb-4" src="{% static "parking-sign.png"%}" width="72" height="72">
+                <h1>请发布新的APP</h1>
+                APP名称：<br>
+                <input type="text" name ="APP名称"  required autofocus><br><br>
+                介绍：<br>
+                <textarea cols="100" rows="10" name ="介绍" required autofocus></textarea><br><br>
+                APP链接：<br>
+                <input type="text" name ="APP链接"  required autofocus>
+                <table align="center">
+                    <tr>
+                        <td>APP图标（缩略图）：</td>
+                        <td><input type="file" name ="APP图标"></td>
+                    </tr>
+                    <tr>
+                        <td align="right" >大图：</td>
+                        <td> <input type="file" name ="大图"></td>
+                    </tr>
+                </table>
+                <br>
+                <input class="btn btn-primary" type="submit" value="发布">
+            </form>
+
+{% endblock content %}
+</body>
+</html>
