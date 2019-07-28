@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     #注册APP
     'products',
     'account',
+
 ]
 
 MIDDLEWARE = [

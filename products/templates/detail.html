@@ -1,0 +1,33 @@
+
+{% extends "theme.html" %}
+{% load staticfiles %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <!DOCTYPE html>
+        <html lang="en">
+        <style type = "text/css">
+                pre{
+                    white-space:pre-wrap;
+                    word-wrap:break-word;
+                }
+        </style>
+
+        <div class="container" style="text-align: center">
+        <h2>{{ product.title }}</h2>
+        <h3 align="right">{{ product.pub_date }}</h3>
+
+        <p><img src="{{ product.image.url }}" width="15%"></p>
+
+        </div>
+        <pre style="width:750px;font-size: 150%;margin:20px auto;">{{ product.intro }}</pre>
+        <div style="text-align: right;margin-right: 100px" >
+        <a class="btn btn-secondary" href="../../" role="button" >返回主页 »</a>
+        </div>
+        </body>
+        </html>
+    {% else %}
+        <script>
+            window.location.href='{% url '登录页面' %}';
+        </script>
+    {% endif %}
+{% endblock content %}
