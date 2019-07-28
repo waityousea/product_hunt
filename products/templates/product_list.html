@@ -1,36 +1,130 @@
 {% extends "theme.html" %}
-
+{% load staticfiles %}
 {% block content %}
+ <!--轮播图-->
+            <style>
+                *{padding: 0px;margin: 0px;}
+                #flash{width:1200px;height: 535px;margin: 5px auto;position: relative;}
+                #flash #play{width:1200px;height: 535px;list-style: none;position:absolute;top:0px;left:0px;}
+                #flash #play li{display: none;position:absolute;top:0px;left:0px;}
+                #flash #play li img{float: left;}
+                #button{position: absolute;bottom:20px;left:470px;list-style: none;}
+                #button li{margin-left: 10px;float: left;}
+                #button li div{width:12px;height: 12px;background:#DDDDDD;border-radius: 6px;cursor: pointer;}
+                #prev{width:40px;height:63px;background:url({% static "images/beijing.png" %}) 0px 0px;position: absolute;top:205px;left:10px;z-index: 1000;}
+                #next{width:40px;height:63px;background:url({% static "images/beijing.png" %}) -40px 0px;position: absolute;top:205px;right:10px;z-index: 1000;}
+                #prev:hover{background:url({% static "images/beijing.png" %}) 0px -62px;}
+                #next:hover{background:url({% static "images/beijing.png" %}) -40px -62px;}
+            </style>
 
-        <div class="container">
-            {% for product in products.all %}
+            <script type="text/javascript" src="{% static "js/script.js" %}"></script>
+            <div id="flash">
+                 <div id="prev"></div>
+                 <div id="next"></div>
+                 <ul id="play">
+                    <li style="display: block;"><img src="{% static "images/1.jpg" %}" alt="" /></li>
+                    <li><img src="{% static "images/2.jpg" %}" alt="" /></li>
+                    <li><img src="{% static "images/3.jpg" %}" alt="" /></li>
+                    <li><img src="{% static "images/4.jpg" %}" alt="" /></li>
+                    <li><img src="{% static "images/5.jpg" %}" alt="" /></li>
+                    <li><img src="{% static "images/6.jpg" %}" alt="" /></li>
+                    <li><img src="{% static "images/7.jpg" %}" alt="" /></li>
+                    <li><img src="{% static "images/8.jpg" %}" alt="" /></li>
+                 </ul>
+                 <ul id="button">
+                    <li><div style="background: #A10000;"></div></li>
+                    <li><div></div></li>
+                    <li><div></div></li>
+                    <li><div></div></li>
+                    <li><div></div></li>
+                    <li><div></div></li>
+                    <li><div></div></li>
+                    <li><div></div></li>
+                 </ul>
+             </div>
+     <!--轮播图到此结束-->
 
-                <div class="card mb-3" style="max-width: 540px;">
-                  <div class="row no-gutters">
-                    <div class="col-md-4">
-                      <img src="{{ product.icon.url }}" class="card-img" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                      <div class="card-body">
-                        <h5 class="card-title">{{ product.title }}</h5>
-                        <p class="card-text">{{ product.intro }}</p>
-                        <p class="card-text"><small class="text-muted">{{ product.pub_date }}</small></p>
-                        <a href="products/{{ product.id}}" class="btn btn-secondary">详情 »</a>
+        <main role="main" class="container">
+        <hr style="border:none;border-top:1px solid #555555;">
+          <div class="row">
+            <div class="col-md-8 blog-main">
+              <h3 class="pb-4 mb-4 font-italic border-bottom">
+               产品信息
+              </h3>
+                <!--下面是主要内容-->
+                {% for product in products.all %}
+                      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="width: 750px">
+                        <div class="col p-4 d-flex flex-column position-static">
+
+                            <div class="width:500px;" style="width: 540px">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <img src="{{ product.icon.url }}" class="card-img" alt="...">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ product.title }}</h5>
+                                            <p class="card-text">{{ product.intro }}</p>
+                                            <p class="card-text"><small class="text-muted">{{ product.pub_date }}</small></p>
+                                            <!--<a href="products/{{ product.id}}" class="btn btn-secondary">详情 »</a>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                          <svg class="card-header" width="160" height="250"  >
+                              <text x="30%" y="50%" >
+                                  <a href="products/{{ product.id}}" class="btn btn-secondary">
+                                      详情
+                                  </a>
+                              </text>
+                          </svg>
+
                       </div>
-                    </div>
-                  </div>
-                </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+                 <!--上面是主要内容-->
+                <!-- /.下面是第二栏内容 -->
+                <div class="blog-post">
+                    <h3 class="pb-4 mb-4 font-italic border-bottom">
+                        第二栏内容
+                    </h3>
 
+                </div><!-- /.第二栏内容 -->
+
+            </div><!-- /.blog-main -->
+
+
+          <!--右侧栏-->
+            <aside class="col-md-4 blog-sidebar">
+              <div class="p-4 mb-3 bg-light rounded">
+                <h4 class="font-italic">About</h4>
+                <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+              </div>
+
+              <div class="p-4">
+                <h4 class="font-italic">Archives</h4>
+
+                <ol class="list-unstyled mb-0">
+                 {% for product in products.all %}
+                  <li><a href="products/{{ product.id}}">{{ product.pub_date }}</a></li>
+
+                 {% endfor %}
+                </ol>
+
+              </div>
+
+              <div class="p-4">
+                <h4 class="font-italic">Elsewhere</h4>
+                <ol class="list-unstyled">
+                  <li><a href="#">GitHub</a></li>
+                  <li><a href="#">Twitter</a></li>
+                  <li><a href="#">Facebook</a></li>
+                </ol>
+              </div>
+            </aside><!-- /.blog-sidebar -->
+
+          </div><!-- /.row -->
+
+        </main><!-- /.container -->
 {% endblock content %}
-<!--
-<div class="card" style="width: 18rem;">
-                  <img src="" with="5%" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title"></h5>
-                    <p class="card-text"></p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-            </div>
--->
