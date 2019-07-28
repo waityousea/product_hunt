@@ -1,3 +1,7 @@
+
+{% extends "theme.html" %}
+{% load staticfiles %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,34 +9,31 @@
     <title>Title</title>
 </head>
 <body>
-{% extends "theme.html" %}
-{% load staticfiles %}
-{% block content %}
-
-            <form method='POST' action="{% url '发布页面'%}" align="center" width="40%" entype="multipart/form-data" >
+            <form method="POST" action="{% url '发布页面'%}" align="center" width="40%" enctype="multipart/form-data" >
                  {% csrf_token %}  <!-- 防止网页攻击的一行代码 -->
-                <img class="mb-4" src="{% static "parking-sign.png"%}" width="72" height="72">
+                <img src="{% static "parking-sign.png"%}" width="72" height="72">
                 <h1>请发布新的APP</h1>
-                APP名称：<br>
-                <input type="text" name ="APP名称"  required autofocus><br><br>
+                标题：<br>
+                <input type="text" value="例：抖音-用短视频记录美好生活" name ="标题"  required autofocus><br><br>
                 介绍：<br>
-                <textarea cols="100" rows="10" name ="介绍" required autofocus></textarea><br><br>
+                <textarea cols="100" rows="10" name ="介绍" required autofocus>在这里写介绍</textarea><br><br>
                 APP链接：<br>
-                <input type="text" name ="APP链接"  required autofocus>
-                <table align="center">
+                <input type="text" name ="APP链接" value="http://" required autofocus>
+               <table align="center">
                     <tr>
                         <td>APP图标（缩略图）：</td>
-                        <td><input type="file" name ="APP图标"></td>
+                        <td><input type="file" name ="APP图标" required autofocus></td>
                     </tr>
                     <tr>
                         <td align="right" >大图：</td>
-                        <td> <input type="file" name ="大图"></td>
+                        <td> <input type="file" name ="大图" required autofocus></td>
                     </tr>
+
                 </table>
+                {{ 错误 }}
                 <br>
                 <input class="btn btn-primary" type="submit" value="发布">
             </form>
-
-{% endblock content %}
 </body>
 </html>
+{% endblock content %}
